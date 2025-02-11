@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+
+</head>
+
+<body>
+    <main class="mainContainer">
+        <header class="inputContainer">
+            <input type="text" id="inputCity" placeholder="Search City...">
+            <button id="searchBtn">
+                <span class="material-symbols-outlined">
+                    search
+                </span>
+            </button>
+        </header>
+
+
+        <section id="weatherInfo" class="section">
+            <div class="cityDetails">
+                <h3 id="cityName">Delhi</h3>
+                <h5 id="cityDate">Wed, 05 Feb</h5>
+            </div>
+            <div class="cityTempDetails">
+                <div class="cityImgTempDetails">
+                    <img src="assets/weather/sunny_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" id="imgTemp">
+
+                    <div class="cityTemp">
+                        <h2 id="TempinCel">20°C</h2>
+                        <h4 id="weatherStatus">Sunny</h4>
+                    </div>
+                </div>
+
+                <div class="moreTempDetails">
+                    <div class="cityHumidity">
+                        <h3 id="Humidity">Humidity:</h3>
+                        <h3 id="HumidityValue">55%</h3>
+                    </div>
+                    <div class="cityWindSpeed">
+                        <h3 id="windSpeed">Wind Speed:</h3>
+                        <h3 id="windSpeedValue">2 m/s</h3>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="forecastContainer">
+                <div class="forecastItem">
+                    <h5 id="forecastDate">09 Feb</h5>
+                    <img src="assets/weather/partly_cloudy_day_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"
+                        id="forecastTempImage">
+                    <h4 id="forecastItemTemp">30°C</h4>
+                </div>
+                <div class="forecastItem">
+                    <h5 id="forecastDate">09 Feb</h5>
+                    <img src="assets/weather/partly_cloudy_day_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"
+                        id="forecastTempImage">
+                    <h4 id="forecastItemTemp">30°C</h4>
+                </div>
+                <div class="forecastItem">
+                    <h5 id="forecastDate">09 Feb</h5>
+                    <img src="assets/weather/partly_cloudy_day_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"
+                        id="forecastTempImage">
+                    <h4 id="forecastItemTemp">30°C</h4>
+                </div>
+                <div class="forecastItem">
+                    <h5 id="forecastDate">09 Feb</h5>
+                    <img src="assets/weather/partly_cloudy_day_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"
+                        id="forecastTempImage">
+                    <h4 id="forecastItemTemp">30°C</h4>
+                </div>
+                <div class="forecastItem">
+                    <h5 id="forecastDate">09 Feb</h5>
+                    <img src="assets/weather/partly_cloudy_day_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"
+                        id="forecastTempImage">
+                    <h4 id="forecastItemTemp">30°C</h4>
+                </div>
+                <div class="forecastItem">
+                    <h5 id="forecastDate">09 Feb</h5>
+                    <img src="assets/weather/partly_cloudy_day_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"
+                        id="forecastTempImage">
+                    <h4 id="forecastItemTemp">30°C</h4>
+                </div>
+                <div class="forecastItem">
+                    <h5 id="forecastDate">09 Feb</h5>
+                    <img src="assets/weather/partly_cloudy_day_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"
+                        id="forecastTempImage">
+                    <h4 id="forecastItemTemp">30°C</h4>
+                </div>
+                <div class="forecastItem">
+                    <h5 id="forecastDate">09 Feb</h5>
+                    <img src="assets/weather/partly_cloudy_day_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"
+                        id="forecastTempImage">
+                    <h4 id="forecastItemTemp">30°C</h4>
+                </div>
+                <div class="forecastItem">
+                    <h5 id="forecastDate">09 Feb</h5>
+                    <img src="assets/weather/partly_cloudy_day_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"
+                        id="forecastTempImage">
+                    <h4 id="forecastItemTemp">30°C</h4>
+                </div>
+            </div>
+        </section>
+
+        <section id="notFound" class="section" style="display: none;">
+            <div class="notFoundContainer">
+                <h1 id="notFoundDisplay">City Not Found!</h1>
+                <h4 id="notFoundMessage">Search for other cities</h4>
+            </div>
+        </section>
+
+
+    </main>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
