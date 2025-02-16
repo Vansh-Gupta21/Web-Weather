@@ -89,9 +89,12 @@ async function updateCityWeather(city) {
         main: { temp, humidity },
         weather: [{ id, main }],
         wind: { speed },
+        name,
         dt,
         timezone
     } = weatherData;
+
+    console.log(convertTimestamp(dt+timezone));
 
     cityName.textContent = country;
     TempinCel.textContent = Math.round(temp) + '°C';
@@ -99,10 +102,12 @@ async function updateCityWeather(city) {
     HumidityValue.textContent = humidity + '%';
     windSpeedValue.textContent = Math.round(speed) + ' m/s';
 
-    cityDate.textContent = getFetchCurrentDate(dt, timezone);
+    cityDate.textContent = getFetchCurrentDate(name, timezone);
     imgTemp.src = `assets/weather/${getFetchWeatherIcon(id)}.png`;
 
-    await updateCityForecast(city);
+    // console.log(convertTimestamp(dt));
+
+    await getHourlyForecast(city, timezone);
     showSection(weatherInfoSection);
 }
 
@@ -124,72 +129,63 @@ function getFetchWeatherIcon(id) {
     else return 'cloud_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24';
 }
 
-function getFetchCurrentDate(timestamp, timezoneOffset) {
-    const date = new Date((timestamp + timezoneOffset) * 1000);
-
+function getFetchCurrentDate(name, timezoneOffset) {
+    const currentUTC = new Date();
+    const localTime = new Date(currentUTC.getTime() + timezoneOffset * 1000);
     const options = { weekday: 'short', day: '2-digit', month: 'short' };
-    return date.toLocaleDateString('en-GB', options);
+
+    const formattedTime = new Intl.DateTimeFormat("en-GB", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false, // Ensure 24-hour format
+        timeZone: "UTC", // Keep it as UTC, since we already applied the offset
+    }).format(localTime);
+    
+    console.log(localTime.toISOString());
+    const timeStamp = localTime.toISOString();
+    const date = timeStamp.split("T")[0];
+    console.log(date);
+    
+    // console.log(formatDate(timeStamp));
+    const finalDate = formatDate(timeStamp);
+
+    console.log(`📍 City: ${name}`);
+    console.log(`📅 Date: ${finalDate}`);
+    console.log(`⏰ Time: ${formattedTime}`);
+
+    return finalDate;
 }
 
-async function updateCityForecast(city) {
+function formatDate(timestamp) {
+    const date = new Date(timestamp);
+    
+    // Extract UTC components to prevent timezone shifts
+    const weekday = date.toLocaleDateString('en-GB', { weekday: 'short', timeZone: 'UTC' });
+    const day = String(date.getUTCDate()).padStart(2, '0'); // Ensures two-digit day
+    const month = date.toLocaleDateString('en-GB', { month: 'short', timeZone: 'UTC' });
+
+    return `${weekday}, ${day} ${month}`;
+}
+
+async function getHourlyForecast(city, timezone) {
     const forecastData = await getFetchWeatherData('forecast', city);
     console.log(forecastData);
 
-    const dailyForecasts = getDailyForecast(forecastData.list);
-    const forecastItems = document.querySelectorAll('.forecastItem');
+    const forecastList = forecastData.list;
+    console.log(forecastList);
 
-    if (forecastItems.length === 0) {
-        console.error("No forecast elements found in the DOM.");
-        return;
+    for (const item of forecastList) {
+        const forecastTimeStr = convertTimestamp(item.dt + timezone);
+        const timeOnly = forecastTimeStr.split(" ")[4].slice(0, 5);
+        console.log(timeOnly);
     }
-
-    dailyForecasts.forEach((day, index) => {
-        if (index < forecastItems.length) {
-            // Update existing forecast elements
-            forecastItems[index].querySelector('forecastDate').textContent = day.date;
-            forecastItems[index].querySelector('forecastTempImage').src = `assets/weather/${getFetchWeatherIcon(day.weatherId)}.png`;
-            // forecastItems[index].querySelector("img").alt = day.weather;
-            forecastItems[index].querySelector('forecastItemTemp').textContent = `${day.temp}°C`;
-
-            forecastItems[index].style.display = "block";
-
-        }
-    });
-
-    // forecastItems.forEach((item, index) => {
-    //     if (index >= dailyForecasts.length) {
-    //         item.style.display = "none"; // Hide extra forecast items
-    //     }
-    // });
-
-    // const forecastContainer = document.querySelector('.forecastContainer');
-    // if (forecastContainer) {
-    //     forecastContainer.style.display = "block"; // Ensure it's visible
-    // } else {
-    //     console.error("forecastContainer not found in the DOM.");
-    // }
-
-
+    
 }
 
-function getDailyForecast(forecastDataList) {
-    const dailyForecastData = [];
-    const usedDates = new Set();
-
-    forecastDataList.forEach(forecast => {
-        const dateObj = new Date(forecast.dt * 1000);
-        const dateStr = dateObj.toLocaleDateString("en-GB", { weekday: "short", day: "2-digit", month: "short" });
-
-        if (!usedDates.has(dateStr) && dateObj.getHours() === 12) {
-            usedDates.add(dateStr);
-            dailyForecastData.push({
-                date: dateStr,
-                temp: Math.round(forecast.main.temp),
-                weather: forecast.weather[0].main,
-                weatherId: forecast.weather[0].id
-            });
-        }
-    });
-
-    return dailyForecastData;
+function convertTimestamp(timestamp) {
+    const date = new Date(timestamp * 1000); // Convert seconds to milliseconds
+    return date.toUTCString(); // Convert to human-readable format in UTC
 }
+
+
