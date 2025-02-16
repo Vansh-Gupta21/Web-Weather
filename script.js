@@ -94,7 +94,7 @@ async function updateCityWeather(city) {
         timezone
     } = weatherData;
 
-    console.log(convertTimestamp(dt+timezone));
+    console.log(convertTimestamp(dt + timezone));
 
     cityName.textContent = country;
     TempinCel.textContent = Math.round(temp) + '°C';
@@ -141,12 +141,12 @@ function getFetchCurrentDate(name, timezoneOffset) {
         hour12: false, // Ensure 24-hour format
         timeZone: "UTC", // Keep it as UTC, since we already applied the offset
     }).format(localTime);
-    
+
     console.log(localTime.toISOString());
     const timeStamp = localTime.toISOString();
     const date = timeStamp.split("T")[0];
     console.log(date);
-    
+
     // console.log(formatDate(timeStamp));
     const finalDate = formatDate(timeStamp);
 
@@ -159,7 +159,7 @@ function getFetchCurrentDate(name, timezoneOffset) {
 
 function formatDate(timestamp) {
     const date = new Date(timestamp);
-    
+
     // Extract UTC components to prevent timezone shifts
     const weekday = date.toLocaleDateString('en-GB', { weekday: 'short', timeZone: 'UTC' });
     const day = String(date.getUTCDate()).padStart(2, '0'); // Ensures two-digit day
@@ -175,12 +175,25 @@ async function getHourlyForecast(city, timezone) {
     const forecastList = forecastData.list;
     console.log(forecastList);
 
+    let count = 0;
+
     for (const item of forecastList) {
+        if (count >= 10) break;
+
         const forecastTimeStr = convertTimestamp(item.dt + timezone);
         const timeOnly = forecastTimeStr.split(" ")[4].slice(0, 5);
         console.log(timeOnly);
+
+        const { temp } = item.main;
+        console.log(Math.round(temp));
+
+        const { id } = item.weather[0];
+        console.log(id);
+
+        count++;
+
     }
-    
+
 }
 
 function convertTimestamp(timestamp) {
