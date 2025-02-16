@@ -12,6 +12,9 @@ const windSpeedValue = document.querySelector('#windSpeedValue');
 const imgTemp = document.querySelector('#imgTemp');
 const cityDate = document.querySelector('#cityDate');
 
+const forecastTimeElement = document.querySelectorAll('.forecastTime');
+const forecastItemTemp = document.querySelectorAll('.forecastItemTemp');
+const forecastItems = document.querySelectorAll(".forecastItem");
 
 const apiKey = `76323bbf37b7b1d7897ac76304744acc`;
 
@@ -176,6 +179,15 @@ async function getHourlyForecast(city, timezone) {
     console.log(forecastList);
 
     let count = 0;
+    let arrTemp = new Array(10);
+    let arrTime = new Array(10);
+    let arrId = new Array(10);
+
+    // forecastItems.forEach((element, index) => {
+    //     if (count >= 10 || index >= forecastList.length) return;
+
+    //     const item = forecastList[index];
+    // })
 
     for (const item of forecastList) {
         if (count >= 10) break;
@@ -183,16 +195,37 @@ async function getHourlyForecast(city, timezone) {
         const forecastTimeStr = convertTimestamp(item.dt + timezone);
         const timeOnly = forecastTimeStr.split(" ")[4].slice(0, 5);
         console.log(timeOnly);
+        arrTime.push(timeOnly);
 
         const { temp } = item.main;
         console.log(Math.round(temp));
+        arrTemp.push(Math.round(temp));
+        // forecastItemTemp.textContent = Math.round(temp) + '°C';
 
         const { id } = item.weather[0];
         console.log(id);
 
         count++;
-
     }
+    console.log(arrTemp);
+    console.log(arrTime);
+
+    let validTemps = arrTemp.filter(temp => temp !== undefined);
+    console.log(validTemps);
+
+    validTemps.forEach((temp, index) => {
+        if (forecastItemTemp[index]) {
+            forecastItemTemp[index].textContent = `${temp}°C`;
+        }
+    });
+
+    let validTimes = arrTime.filter(time => time !== undefined);
+    console.log(validTimes);
+    validTimes.forEach((time, index) => {
+        if (forecastTimeElement[index]) {
+            forecastTimeElement[index].textContent = time;
+        }
+    });
 
 }
 
