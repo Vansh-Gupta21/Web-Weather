@@ -15,6 +15,7 @@ const cityDate = document.querySelector('#cityDate');
 const forecastTimeElement = document.querySelectorAll('.forecastTime');
 const forecastItemTemp = document.querySelectorAll('.forecastItemTemp');
 const forecastItems = document.querySelectorAll(".forecastItem");
+const forecastTempImage = document.querySelectorAll(".forecastTempImage");
 
 const apiKey = `76323bbf37b7b1d7897ac76304744acc`;
 
@@ -85,7 +86,7 @@ async function updateCityWeather(city) {
         return;
     }
 
-    console.log(weatherData);
+    // console.log(weatherData);
 
     const {
         name: country,
@@ -97,7 +98,6 @@ async function updateCityWeather(city) {
         timezone
     } = weatherData;
 
-    console.log(convertTimestamp(dt + timezone));
 
     cityName.textContent = country;
     TempinCel.textContent = Math.round(temp) + '°C';
@@ -107,8 +107,6 @@ async function updateCityWeather(city) {
 
     cityDate.textContent = getFetchCurrentDate(name, timezone);
     imgTemp.src = `assets/weather/${getFetchWeatherIcon(id)}.png`;
-
-    // console.log(convertTimestamp(dt));
 
     await getHourlyForecast(city, timezone);
     showSection(weatherInfoSection);
@@ -141,16 +139,15 @@ function getFetchCurrentDate(name, timezoneOffset) {
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
-        hour12: false, // Ensure 24-hour format
-        timeZone: "UTC", // Keep it as UTC, since we already applied the offset
+        hour12: false,
+        timeZone: "UTC",
     }).format(localTime);
 
-    console.log(localTime.toISOString());
+    // console.log(localTime.toISOString());
+
     const timeStamp = localTime.toISOString();
     const date = timeStamp.split("T")[0];
-    console.log(date);
 
-    // console.log(formatDate(timeStamp));
     const finalDate = formatDate(timeStamp);
 
     console.log(`📍 City: ${name}`);
@@ -173,46 +170,34 @@ function formatDate(timestamp) {
 
 async function getHourlyForecast(city, timezone) {
     const forecastData = await getFetchWeatherData('forecast', city);
-    console.log(forecastData);
+    // console.log(forecastData);
 
     const forecastList = forecastData.list;
-    console.log(forecastList);
+    // console.log(forecastList);
 
     let count = 0;
     let arrTemp = new Array(10);
     let arrTime = new Array(10);
     let arrId = new Array(10);
 
-    // forecastItems.forEach((element, index) => {
-    //     if (count >= 10 || index >= forecastList.length) return;
-
-    //     const item = forecastList[index];
-    // })
-
     for (const item of forecastList) {
         if (count >= 10) break;
 
         const forecastTimeStr = convertTimestamp(item.dt + timezone);
         const timeOnly = forecastTimeStr.split(" ")[4].slice(0, 5);
-        console.log(timeOnly);
         arrTime.push(timeOnly);
 
         const { temp } = item.main;
-        console.log(Math.round(temp));
         arrTemp.push(Math.round(temp));
-        // forecastItemTemp.textContent = Math.round(temp) + '°C';
 
         const { id } = item.weather[0];
-        console.log(id);
+        arrId.push(id);
 
         count++;
     }
-    console.log(arrTemp);
-    console.log(arrTime);
 
     let validTemps = arrTemp.filter(temp => temp !== undefined);
-    console.log(validTemps);
-
+    // console.log(validTemps);
     validTemps.forEach((temp, index) => {
         if (forecastItemTemp[index]) {
             forecastItemTemp[index].textContent = `${temp}°C`;
@@ -220,10 +205,18 @@ async function getHourlyForecast(city, timezone) {
     });
 
     let validTimes = arrTime.filter(time => time !== undefined);
-    console.log(validTimes);
+    // console.log(validTimes);
     validTimes.forEach((time, index) => {
         if (forecastTimeElement[index]) {
             forecastTimeElement[index].textContent = time;
+        }
+    });
+
+    let validID = arrId.filter(id => id !== undefined);
+    // console.log(validID);
+    validID.forEach((id, index) => {
+        if (forecastTempImage[index]) {
+            forecastTempImage[index].src = `assets/weather/${getFetchWeatherIcon(id)}.png`;
         }
     });
 
