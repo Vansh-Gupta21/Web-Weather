@@ -1,241 +1,239 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", serif;
 }
 
-body{
-    background-color: darkgray;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+body {
+  background-color: darkgray;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
-.mainContainer{
-    border: solid;
-    border-radius: 40px;
-    background: rgba(46, 45, 45, 0.1);
-    width: 92%;
-    height: 89%;
-    padding: 20px
+.mainContainer {
+  border: solid;
+  border-radius: 40px;
+  background: rgba(46, 45, 45, 0.1);
+  width: 92%;
+  height: 89%;
+  padding: 20px;
 }
 
-.inputContainer{
-    position: relative;
+.inputContainer {
+  position: relative;
 }
 
-#inputCity{
-    width: 100%;
-    margin-top: 15px;
-    border: 2px solid transparent;
-    border-radius: 95px;
-    background-color: rgb(0, 0, 0, 0.12);
-    outline: none;
-    font-size: 25px;
-    padding: 5px 45px;
-    transition: background 0.4s ease, border 0.4s ease, padding 0.3s ease;
+#inputCity {
+  width: 100%;
+  margin-top: 15px;
+  border: 2px solid transparent;
+  border-radius: 95px;
+  background-color: rgb(0, 0, 0, 0.12);
+  outline: none;
+  font-size: 25px;
+  padding: 5px 45px;
+  transition: background 0.4s ease, border 0.4s ease, padding 0.3s ease;
 }
-#inputCity::placeholder{
-    color: rgb(255, 255, 255, .72);
+#inputCity::placeholder {
+  color: rgb(255, 255, 255, 0.72);
 }
 
 #inputCity:focus {
-    background-color: rgba(255, 255, 255, 0.2); 
-    border: 2px solid rgba(255, 255, 255, 0.5); 
-    padding: 5px 50px; 
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  padding: 5px 50px;
 }
 
 #inputCity:focus::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 
-#searchBtn{
-    position: absolute;
-    /* width: 25px;  /* Increase button width */
-    /* height: 25px; */ 
-    top: 27%;
+#searchBtn {
+  position: absolute;
+  /* width: 25px;  /* Increase button width */
+  /* height: 25px; */
+  top: 27%;
 
-    right: 17px;
+  right: 17px;
 
-    color: white;
-    background: transparent;
-    border: none;
-    padding: 3px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  color: white;
+  background: transparent;
+  border: none;
+  padding: 3px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .material-symbols-outlined {
-    font-size: 35px !important; /* Forcefully increase icon size */
-    display: inline-block;
+  font-size: 35px !important; /* Forcefully increase icon size */
+  display: inline-block;
 }
 
-#searchBtn:active{
-    background-color: rgb(0, 0, 0, 0.3);
+#searchBtn:active {
+  background-color: rgb(0, 0, 0, 0.3);
 }
 
-.weatherInfo{
-    white-space: nowrap;
+.weatherInfo {
+  white-space: nowrap;
 }
 
-.cityDetails{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 25px;
-    margin-left: 37px;
-    margin-right: 37px;
-    /* border: 1px solid black; */
+.cityDetails {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  margin-left: 37px;
+  margin-right: 37px;
+  /* border: 1px solid black; */
 }
 
-#cityName{
-    color: white;
-    font-size:50px;
+#cityName {
+  color: white;
+  font-size: 50px;
 }
 
-#cityDate{
-    color: white;
-    margin-top: 7px;
-    font-weight: 300;
-    font-size: 30px;
+#cityDate {
+  color: white;
+  margin-top: 7px;
+  font-weight: 300;
+  font-size: 30px;
 }
 
-.cityTempDetails{
-    margin-top: 25px;
-    margin-left: 39px;
-    display: flex;
-    justify-content: space-between;
+.cityTempDetails {
+  margin-top: 25px;
+  margin-left: 39px;
+  display: flex;
+  justify-content: space-between;
 }
 
-#imgTemp{
-    height: 125px;
-    width: 125px;
+#imgTemp {
+  height: 125px;
+  width: 125px;
 }
 
-.cityImgTempDetails{
-    display: flex;
+.cityImgTempDetails {
+  display: flex;
 }
 
-.cityTemp{
-    margin-top: 2px;
-    margin-left: 40px;
+.cityTemp {
+  margin-top: 2px;
+  margin-left: 40px;
 }
 
-#TempinCel{
-    font-size: 50px;
+#TempinCel {
+  font-size: 50px;
 }
 
-#weatherStatus{
-    margin-top: -13px;
-    font-size: 21px;
+#weatherStatus {
+  margin-top: -13px;
+  font-size: 21px;
 }
 
-.moreTempDetails{
-    margin-top: 17px;
-    margin-right: 45px;
+.moreTempDetails {
+  margin-top: 17px;
+  margin-right: 45px;
 }
 
-.cityHumidity{
-    display: flex;
-    gap: 15px;
+.cityHumidity {
+  display: flex;
+  gap: 15px;
 }
 
-.cityWindSpeed{
-    display: flex;
-    gap: 15px;
+.cityWindSpeed {
+  display: flex;
+  gap: 15px;
 }
 
-.forecastContainer{
-    margin-top: 60px;
-    margin-left: 37px;
-    margin-right: 37px;
-    display: flex;
-    gap: 20px;
-    overflow: scroll;
-    padding-bottom: 15px;
+.forecastContainer {
+  margin-top: 60px;
+  margin-left: 37px;
+  margin-right: 37px;
+  display: flex;
+  gap: 20px;
+  overflow: scroll;
+  padding-bottom: 15px;
 
-    overflow-x: auto;  /* Enable horizontal scrolling */
-    overflow-y: hidden; /* Hide vertical scrollbar */
-    white-space: nowrap; 
-    /* scrollbar-width: thin; */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  white-space: nowrap;
+  /* scrollbar-width: thin; */
 }
 
-.forecastContainer::-webkit-scrollbar{
-    height: 10px;
+.forecastContainer::-webkit-scrollbar {
+  height: 10px;
 }
-.forecastContainer::-webkit-scrollbar-track{
-    background: rgb(0, 0, 0, 0.1);
-    border-radius: 10px;
+.forecastContainer::-webkit-scrollbar-track {
+  background: rgb(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
-.forecastContainer::-webkit-scrollbar-thumb{
-    background: rgb(0, 0, 0, 0.4);
-    border-radius: 10px;
-    transition: 0.3s background ease-in-out;
+.forecastContainer::-webkit-scrollbar-thumb {
+  background: rgb(0, 0, 0, 0.4);
+  border-radius: 10px;
+  transition: 0.3s background ease-in-out;
 }
 .forecastContainer::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.6);
 }
 
-.forecastItem{
-    min-width: 150px;
-    background: rgb(255, 255, 255, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: 12px;
-    align-items: center;
-    border-radius: 15px;
-    transition: 0.3s background ease;
+.forecastItem {
+  min-width: 150px;
+  background: rgb(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  align-items: center;
+  border-radius: 15px;
+  transition: 0.3s background ease;
 }
 
-.forecastItem:hover{
-    background: rgb(255, 255, 255, 0.3);
+.forecastItem:hover {
+  background: rgb(255, 255, 255, 0.3);
 }
 
-#forecastTempImage{
-    height: 90px;
-    width: 90px;
-    margin: 5px 0;
+#forecastTempImage {
+  height: 90px;
+  width: 90px;
+  margin: 5px 0;
 }
 
-#forecastDate{
-    font-size: 17px;
-    font-weight: 600;
+#forecastDate {
+  font-size: 17px;
+  font-weight: 600;
 }
 
-#forecastItemTemp{
-    font-size: 17px;
-    font-weight: 450;
+#forecastItemTemp {
+  font-size: 17px;
+  font-weight: 450;
 }
 
-#notFound{
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+#notFound {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .notFoundContainer {
-    display: flex;
-    flex-direction: column; /* Stacks elements vertically */
-    align-items: center;
-    justify-content: center;
-    margin-top: 50px;
+  display: flex;
+  flex-direction: column; /* Stacks elements vertically */
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
 }
 
-#notFoundDisplay{
-    font-size: 35px;
+#notFoundDisplay {
+  font-size: 35px;
 }
 
-#notFoundMessage{
-    margin-top: 5px;
-    font-size: 18px;
-    font-weight: 400;
+#notFoundMessage {
+  margin-top: 5px;
+  font-size: 18px;
+  font-weight: 400;
 }
