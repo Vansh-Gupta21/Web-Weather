@@ -17,7 +17,7 @@ const forecastItemTemp = document.querySelectorAll('.forecastItemTemp');
 const forecastItems = document.querySelectorAll(".forecastItem");
 const forecastTempImage = document.querySelectorAll(".forecastTempImage");
 
-const apiKey = `76323bbf37b7b1d7897ac76304744acc`;
+const apiKey = `YOUR_API_KEY`;
 
 
 document.addEventListener("DOMContentLoaded", () => {
